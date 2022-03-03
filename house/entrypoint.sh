@@ -11,4 +11,4 @@ echo 'command = "/bin/true"' > /root/.ssh/authorized_keys
 echo "${PUBLIC_SSH_KEY}" >> /root/.ssh/authorized_keys
 chmod go-rx /root/.ssh/authorized_keys
 
-/usr/sbin/sshd -d
+/usr/sbin/sshd -De -o "StreamLocalBindUnlink yes"
