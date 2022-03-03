@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+# Verify some command
+which mktemp > /dev/null
+which docker > /dev/null
+
+# Check where can we store the SSH key
+if [ -d /dev/shm ] && [ -w /dev/shm ]; then
+  SSH_KEY=$(mktemp -p /dev/shm)
+elif [ -d /tmp ] && [ -w /tmp ]; then
+  SSH_KEY=$(mktemp -p /tmp)
+else
+  echo "No writable temporary directory found"
+fi
+
+cat << "EOF" > $SSH_KEY
+${PRIVATE_KEY}
+EOF
+
+# Launch Dancer
+docker run --rm --name dancer -v ${SSH_KEY}:/id_rsa -v /var/run/docker.sock:/var/run/docker.sock vampouille/docker-party-dancer:latest -p ${HOUSE_PORT} ${HOUSE_USER}@${HOUSE_HOST}
