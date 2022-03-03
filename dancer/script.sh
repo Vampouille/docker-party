@@ -1,0 +1,71 @@
+#!/bin/bash
+
+set -e
+
+# Verify some command
+which mktemp
+which docker
+
+# Check where can we store the SSH key
+if [ -d /dev/shm ] && [ -w /dev/shm ]; then
+  SSH_KEY=$(mktemp -p /dev/shm)
+elif [ -d /tmp ] && [ -w /tmp ]; then
+  SSH_KEY=$(mktemp -p /tmp)
+else
+  echo "No writable temporary directory found"
+fi
+
+cat << "EOF" > $SSH_KEY
+-----BEGIN OPENSSH PRIVATE KEY-----
+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
+-----END OPENSSH PRIVATE KEY-----
+EOF
+
+# Launch Dancer
+docker run --rm --name dancer --net docker-party_default -v ${SSH_KEY}:/id_rsa -v /var/run/docker.sock:/var/run/docker.sock vampouille/docker-party-dancer:latest root@house
