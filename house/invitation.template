@@ -5,6 +5,7 @@ set -e
 # Verify some command
 which mktemp > /dev/null
 which docker > /dev/null
+which tr > /dev/null
 
 # Check where can we store the SSH key
 if [ -d /dev/shm ] && [ -w /dev/shm ]; then
