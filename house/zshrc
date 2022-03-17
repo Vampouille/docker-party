@@ -3,6 +3,8 @@ ZSH_THEME="dockerparty"
 zstyle ':omz:update' mode disabled
 COMPLETION_WAITING_DOTS="true"
 plugins=(docker)
+fpath=(/root $fpath)
+
 source $ZSH/oh-my-zsh.sh
 export LANG=fr_FR.UTF-8
 export LC_ALL=fr_FR.UTF-8
