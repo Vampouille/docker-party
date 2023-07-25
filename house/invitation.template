@@ -21,4 +21,4 @@ ${PRIVATE_KEY}
 EOF
 
 # Launch Dancer
-docker run --rm --name dancer -v ${SSH_KEY}:/id_rsa -v /var/run/docker.sock:/var/run/docker.sock vampouille/docker-party-dancer:latest -p ${HOUSE_PORT} ${HOUSE_USER}@${HOUSE_HOST}
+docker run -ti --rm --name dancer -v ${SSH_KEY}:/id_rsa -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/vampouille/docker-party:main-dancer -p ${HOUSE_PORT} ${HOUSE_USER}@${HOUSE_HOST}
